@@ -1,0 +1,28 @@
+@import "../../../assets/styles/mixins.scss";
+#dashboard {
+  width: 100%;
+  height: calc(100vh - 64px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  @include style-scrollbar();
+  .header-container {
+    margin: 20px 40px;
+  }
+  .filter-container {
+    margin-left: 40px;
+  }
+  .repositories-container {
+    position: relative;
+    width: 80vw;
+    min-height: calc(100vh - 164px);
+  }
+  .languages-container {
+    padding-top: 30px;
+  }
+  .languages-title {
+    margin-bottom: 30px;
+  }
+  footer {
+    width: 79vw;
+  }
+}

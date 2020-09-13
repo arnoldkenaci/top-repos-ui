@@ -1,0 +1,33 @@
+.card {
+  width: 350px;
+  margin: 30px;
+  min-height: 300px;
+}
+
+.mat-card-content {
+  position: relative;
+}
+
+.header-image {
+  background-size: cover;
+}
+.repo-language-color {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.action-button {
+  span {
+    margin-right: 5px;
+  }
+}
+.star-section {
+  position: absolute;
+  right: 50px;
+  top: 80px;
+}

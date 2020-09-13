@@ -1,0 +1,67 @@
+<div id="dashboard">
+  <header
+    class="header-container"
+    [@animate]="{ value: '*', params: { duration: '500ms', x: '100%' } }"
+  >
+    <h1>Top Repos of the week <mat-icon color="accent">flash_on</mat-icon></h1>
+    <h3>{{ lastWeek }} - {{ today }} <mat-icon>event</mat-icon></h3>
+  </header>
+  <section
+    class="filter-container"
+    [@animate]="{ value: '*', params: { duration: '500ms', x: '100%' } }"
+  >
+    <mat-chip-list aria-label="Fish selection">
+      <mat-chip
+        *ngFor="let filter of filterValues"
+        [selected]="filter.value === reposFilter"
+        (click)="setReposFilter(filter.value)"
+        color="primary"
+        >{{ filter.text }}</mat-chip
+      >
+    </mat-chip-list>
+  </section>
+  <div fxLayout="row" fxFlexAlign="space-around" class="container">
+    <section class="repositories-container">
+      <div fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="start">
+        <app-repository
+          [@animate]="{ value: '*', params: { duration: '1000ms' } }"
+          [repository]="repository"
+          (repositoryStarsChange)="repositoryStarsChange()"
+          *ngFor="let repository of repositories"
+        ></app-repository>
+      </div>
+      <ngx-spinner
+        bdColor="rgba(51,51,51,0.8)"
+        size="medium"
+        color="#fff"
+        type="ball-scale-multiple"
+        [fullScreen]="false"
+      >
+        <p style="font-size: 20px; color: white">Loading...</p>
+      </ngx-spinner>
+    </section>
+
+    <aside
+      class="languages-container"
+      [@animate]="{ value: '*', params: { duration: '500ms', y: '100%' } }"
+    >
+      <app-languages
+        (languagesSelected)="setLanguagesSelected($event)"
+      ></app-languages>
+    </aside>
+  </div>
+
+  <footer
+    fxLayout="row"
+    fxLayoutAlign="center"
+    *ngIf="repositories && repositories.length > 1"
+  >
+    <mat-paginator
+      [length]="totalRepositories"
+      [pageSize]="9"
+      (page)="changePage($event)"
+      [hidden]="this.disablePaginator"
+    >
+    </mat-paginator>
+  </footer>
+</div>

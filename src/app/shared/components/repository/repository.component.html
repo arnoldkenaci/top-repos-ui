@@ -1,0 +1,75 @@
+<mat-card class="card" fxLayout="column" fxLayoutAlign="space-between">
+  <mat-card-header>
+    <div
+      mat-card-avatar
+      class="header-image"
+      [style.background-image]="'url(' + repository?.owner.avatar_url + ')'"
+    ></div>
+    <mat-card-title>{{ repository?.name }}</mat-card-title>
+    <mat-card-subtitle>
+      {{ repository?.owner.login }}
+    </mat-card-subtitle>
+    <mat-card-subtitle *ngIf="repository?.language">
+      <span
+        class="repo-language-color"
+        [style.background-color]="getColorFromString(repository?.language)"
+      ></span
+      ><span>{{ repository?.language }}</span>
+    </mat-card-subtitle>
+    <mat-card-subtitle class="star-section">
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Example icon button with a vertical three dot icon"
+        (click)="starRepository(repository)"
+      >
+        <mat-icon>{{
+          repository?.isStarred ? "star" : "star_border"
+        }}</mat-icon>
+      </button>
+      <span>{{ repository?.stargazers_count }}</span></mat-card-subtitle
+    >
+  </mat-card-header>
+  <!-- <img
+    mat-card-image
+    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    alt="Photo of a Shiba Inu"
+  /> -->
+  <mat-card-content>
+    <p>
+      {{ repository?.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions
+    fxLayout="row"
+    fxLayoutGap="15px"
+    fxLayoutAlign="space-around"
+  >
+    <div>
+      <a
+        [href]="repository?.html_url"
+        target="_blank"
+        class="action-button"
+        mat-flat-button
+      >
+        <span [octicon]="'link'" color="white" width="16"></span
+        ><span>View on GitHub</span>
+      </a>
+      <button class="action-button" mat-flat-button>
+        <span [octicon]="'repo-forked'" color="white" width="10"></span>
+        <span>Fork</span>
+      </button>
+      <button
+        ngxClipboard
+        [cbContent]="'git clone ' + repository?.html_url"
+        class="action-button"
+        color="primary"
+        (click)="onGitClone()"
+        mat-flat-button
+      >
+        <span [octicon]="'desktop-download'" color="black" width="14"></span>
+        <span>Clone</span>
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

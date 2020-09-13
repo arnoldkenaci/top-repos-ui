@@ -1,0 +1,60 @@
+<div id="languages">
+  <mat-card class="card" fxLayout="column" fxLayoutAlign="space-between">
+    <mat-card-header>
+      <mat-card-title class="languages-title">Languages</mat-card-title>
+      <mat-card-subtitle>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Pick one</mat-label>
+          <input
+            type="text"
+            placeholder="Pick one"
+            aria-label="Number"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete
+            (optionSelected)="setLanguage($event.option.value)"
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+          >
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img
+      mat-card-image
+      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+      alt="Photo of a Shiba Inu"
+    /> -->
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let language of selectedLanguages; let i = index"
+        >
+          <div mat-line>
+            <span
+              class="repo-language-color"
+              [style.background-color]="getColorFromString(language)"
+            ></span>
+            <span>{{ language }}</span>
+          </div>
+          <button
+            mat-icon-button
+            aria-label="Example icon button with a vertical three dot icon"
+            (click)="removeLanguage(i)"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-list-item>
+        <div *ngIf="selectedLanguages.length === 0"></div>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
